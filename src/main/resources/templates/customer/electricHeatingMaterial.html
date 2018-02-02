@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
+    <title>电暖材料</title>
+    <link rel="stylesheet" href="../../static/css/weui.css" th:href="@{/css/weui.css}"/>
+    <link rel="stylesheet" href="../../static/css/example.css" th:href="@{/css/example.css}"/>
+</head>
+<body>
+
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page input js_show">
+        <div class="page__bd">
+            <form method="post" id="form">
+
+                <div class="weui-cells__title">客厅</div>
+
+                <div class="weui-cells weui-cells_checkbox">
+                    <input type="hidden" th:value="${id}" id="id" th:name="id"/>
+                    <label class="weui-cell weui-check__label" for="s11">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="livingRoomKBMaterial" th:value="none"
+                                   th:checked="${decorationForm.livingRoomKBMaterial !=null and #strings.containsIgnoreCase(decorationForm.livingRoomKBMaterial,'none')}"
+                                   id="s11"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>无需求</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s12">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="livingRoomKBMaterial" th:value="marble"
+                                   th:checked="${decorationForm.livingRoomKBMaterial !=null and #strings.containsIgnoreCase(decorationForm.livingRoomKBMaterial,'marble')}"
+                                   id="s12"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>大理石</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s13">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="livingRoomKBMaterial" th:value="woodfloor"
+                                   th:checked="${decorationForm.livingRoomKBMaterial !=null and #strings.containsIgnoreCase(decorationForm.livingRoomKBMaterial,'woodfloor')}"
+                                   id="s13"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>实木地板</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s14">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="livingRoomKBMaterial" th:value="ceramicTile"
+                                   th:checked="${decorationForm.livingRoomKBMaterial !=null and #strings.containsIgnoreCase(decorationForm.livingRoomKBMaterial,'ceramicTile')}"
+                                   id="s14"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>瓷砖</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s15">
+                        <div class="weui-cell__hd">备注</div>
+                        <div class="weui-cell__bd">
+                            <p>
+                                <input class="weui-input" name="livingRoomRemark" th:value="${decorationForm.livingRoomRemark}" id="s15" type="text" placeholder=""/>
+                            </p>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="weui-cells__title">餐厅</div>
+                <div class="weui-cells weui-cells_checkbox">
+                    <label class="weui-cell weui-check__label" for="s16">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="diningRoomKBMaterial" th:value="none"
+                                   th:checked="${decorationForm.diningRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.diningRoomKBMaterial,'ceramicTile')}"
+                                   id="s16"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>无需求</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s17">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="diningRoomKBMaterial" th:value="marble"
+                                   th:checked="${decorationForm.diningRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.diningRoomKBMaterial,'marble')}"
+                                   id="s17"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>大理石</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s18">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="diningRoomKBMaterial" th:value="woodfloor"
+                                   th:checked="${decorationForm.diningRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.diningRoomKBMaterial,'woodfloor')}"
+                                   id="s18"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>实木地板</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s19">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="diningRoomKBMaterial" th:value="ceramicTile"
+                                   th:checked="${decorationForm.diningRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.diningRoomKBMaterial,'ceramicTile')}"
+                                   id="s19"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>瓷砖</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s20">
+                        <div class="weui-cell__hd">备注</div>
+                        <div class="weui-cell__bd">
+                            <p>
+                                <input type="text" class="weui-input" name="diningRoomRemark" th:value="${decorationForm.diningRoomRemark}" placeholder="" id="s20"/>
+                            </p>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="weui-cells__title">厨房</div>
+                <div class="weui-cells weui-cells_checkbox">
+                    <label class="weui-cell weui-check__label" for="s21">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="kitchenRoomKBMaterial" th:value="none"
+                                   th:checked="${decorationForm.kitchenRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.kitchenRoomKBMaterial,'none')}"
+                                   id="s21"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>无需求</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s22">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="kitchenRoomKBMaterial" th:value="marble"
+                                   th:checked="${decorationForm.kitchenRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.kitchenRoomKBMaterial,'marble')}"
+                                   id="s22"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>大理石</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s23">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="kitchenRoomKBMaterial" th:value="woodfloor"
+                                   th:checked="${decorationForm.kitchenRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.kitchenRoomKBMaterial,'woodfloor')}"
+                                   id="s23"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>实木地板</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s24">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="kitchenRoomKBMaterial" th:value="ceramicTile"
+                                   th:checked="${decorationForm.kitchenRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.kitchenRoomKBMaterial,'ceramicTile')}"
+                                   id="s24"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>瓷砖</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s25">
+                        <div class="weui-cell__hd">备注</div>
+                        <div class="weui-cell__bd">
+                            <p>
+                                <input id="s25" class="weui-input" name="kitchenRoomRemark" th:value="${decorationForm.kitchenRoomRemark}"  type="text" placeholder=""/>
+                            </p>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="weui-cells__title">主卧</div>
+                <div class="weui-cells weui-cells_checkbox">
+                    <label class="weui-cell weui-check__label" for="s26">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="hostBedRoomKBMaterial" th:value="none"
+                                   th:checked="${decorationForm.hostBedRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.hostBedRoomKBMaterial,'none')}"
+                                   id="s26"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>无需求</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s27">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="hostBedRoomKBMaterial" th:value="marble"
+                                   th:checked="${decorationForm.hostBedRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.hostBedRoomKBMaterial,'marble')}"
+                                   id="s27"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>大理石</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s28">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="hostBedRoomKBMaterial" th:value="woodfloor"
+                                   th:checked="${decorationForm.hostBedRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.hostBedRoomKBMaterial,'woodfloor')}"
+                                   id="s28"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>实木地板</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s29">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="hostBedRoomKBMaterial" th:value="ceramicTile"
+                                   th:checked="${decorationForm.hostBedRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.hostBedRoomKBMaterial,'ceramicTile')}"
+                                   id="s29"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>瓷砖</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s30">
+                        <div class="weui-cell__hd">备注</div>
+                        <div class="weui-cell__bd">
+                            <p>
+                                <input id="s30" class="weui-input" name="hostBedRoomRemark" th:value="${decorationForm.hostBedRoomRemark}" type="text" placeholder=""/>
+                            </p>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="weui-cells__title">次卧</div>
+                <div class="weui-cells weui-cells_checkbox">
+                    <label class="weui-cell weui-check__label" for="s31">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="secondBedRoomKBMaterial" th:value="none"
+                                   th:checked="${decorationForm.secondBedRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.secondBedRoomKBMaterial,'none')}"
+                                   id="s31"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>无需求</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s32">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="secondBedRoomKBMaterial" th:value="marble"
+                                   th:checked="${decorationForm.secondBedRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.secondBedRoomKBMaterial,'marble')}"
+                                   id="s32"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>大理石</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s33">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="secondBedRoomKBMaterial" th:value="woodfloor"
+                                   th:checked="${decorationForm.secondBedRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.secondBedRoomKBMaterial,'woodfloor')}"
+                                   id="s33"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>实木地板</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s34">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="secondBedRoomKBMaterial" th:value="ceramicTile"
+                                   th:checked="${decorationForm.secondBedRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.secondBedRoomKBMaterial,'ceramicTile')}"
+                                   id="s34"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>瓷砖</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s35">
+                        <div class="weui-cell__hd">备注</div>
+                        <div class="weui-cell__bd">
+                            <p>
+                                <input id="s35" class="weui-input" name="secondBedRoomRemark" th:value="${decorationForm.secondBedRoomRemark}" type="text"
+                                       placeholder=""/>
+                            </p>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="weui-cells__title">客卧</div>
+                <div class="weui-cells weui-cells_checkbox">
+                    <label class="weui-cell weui-check__label" for="s36">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="guestBedRoomKBMaterial" th:value="none"
+                                   th:checked="${decorationForm.guestBedRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.guestBedRoomKBMaterial,'none')}"
+                                   id="s36"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>无需求</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s37">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="guestBedRoomKBMaterial" th:value="marble"
+                                   th:checked="${decorationForm.guestBedRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.guestBedRoomKBMaterial,'marble')}"
+                                   id="s37"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>大理石</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s38">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="guestBedRoomKBMaterial" th:value="woodfloor"
+                                   th:checked="${decorationForm.guestBedRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.guestBedRoomKBMaterial,'woodfloor')}"
+                                   id="s38"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>实木地板</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s39">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="guestBedRoomKBMaterial" th:value="ceramicTile"
+                                   th:checked="${decorationForm.guestBedRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.guestBedRoomKBMaterial,'ceramicTile')}"
+                                   id="s39"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>瓷砖</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s40">
+                        <div class="weui-cell__hd">备注</div>
+                        <div class="weui-cell__bd">
+                            <p>
+                                <input id="s40" class="weui-input" name="guestBedRoomRemark" th:value="${decorationForm.guestBedRoomRemark}" type="text"
+                                       placeholder=""/>
+                            </p>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="weui-cells__title">书房</div>
+                <div class="weui-cells weui-cells_checkbox">
+                    <label class="weui-cell weui-check__label" for="s41">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="studyRoomKBMaterial" th:value="none"
+                                   th:checked="${decorationForm.studyRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.studyRoomKBMaterial,'none')}"
+                                   id="s41"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>无需求</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s42">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="studyRoomKBMaterial" th:value="marble"
+                                   th:checked="${decorationForm.studyRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.studyRoomKBMaterial,'marble')}"
+                                   id="s42"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>大理石</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s43">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="studyRoomKBMaterial" th:value="woodfloor"
+                                   th:checked="${decorationForm.studyRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.studyRoomKBMaterial,'woodfloor')}"
+                                   id="s43"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>实木地板</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s44">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="studyRoomKBMaterial" th:value="ceramicTile"
+                                   th:checked="${decorationForm.studyRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.studyRoomKBMaterial,'ceramicTile')}"
+                                   id="s44"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>瓷砖</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s45">
+                        <div class="weui-cell__hd">备注</div>
+                        <div class="weui-cell__bd">
+                            <p>
+                                <input id="s45" class="weui-input" name="studyRoomRemark" th:value="${decorationForm.studyRoomRemark}" type="text" placeholder=""/>
+                            </p>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="weui-cells__title">储物间</div>
+                <div class="weui-cells weui-cells_checkbox">
+                    <label class="weui-cell weui-check__label" for="s46">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="storeRoomKBMaterial" th:value="none"
+                                   th:checked="${decorationForm.storeRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.storeRoomKBMaterial,'none')}"
+                                   id="s46"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>无需求</p>
+                        </div>
+                    </label> <label class="weui-cell weui-check__label" for="s47">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" class="weui-check" name="storeRoomKBMaterial" th:value="marble"
+                               th:checked="${decorationForm.storeRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.storeRoomKBMaterial,'marble')}"
+                               id="s47"/> <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>大理石</p>
+                    </div>
+                </label>
+                    <label class="weui-cell weui-check__label" for="s48">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="storeRoomKBMaterial" th:value="woodfloor"
+                                   th:checked="${decorationForm.storeRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.storeRoomKBMaterial,'woodfloor')}"
+                                   id="s48"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>实木地板</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s49">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="storeRoomKBMaterial" th:value="ceramicTile"
+                                   th:checked="${decorationForm.storeRoomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.storeRoomKBMaterial,'ceramicTile')}"
+                                   id="s49"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>瓷砖</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s50">
+                        <div class="weui-cell__hd">备注</div>
+                        <div class="weui-cell__bd">
+                            <p>
+                                <input id="s50" class="weui-input" name="storeRoomRemark" th:value="${decorationForm.storeRoomRemark}" type="text" placeholder=""/>
+                            </p>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="weui-cells__title">阳台</div>
+                <div class="weui-cells weui-cells_checkbox">
+                    <label class="weui-cell weui-check__label" for="s51">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="balconyKBMaterial" th:value="none"
+                                   th:checked="${decorationForm.balconyKBMaterial != null and #strings.containsIgnoreCase(decorationForm.balconyKBMaterial,'none')}"
+                                   id="s51"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>无需求</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s52">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="balconyKBMaterial" th:value="marble"
+                                   th:checked="${decorationForm.balconyKBMaterial != null and #strings.containsIgnoreCase(decorationForm.balconyKBMaterial,'marble')}"
+                                   id="s52"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>大理石</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s53">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="balconyKBMaterial" th:value="woodfloor"
+                                   th:checked="${decorationForm.balconyKBMaterial != null and #strings.containsIgnoreCase(decorationForm.balconyKBMaterial,'woodfloor')}"
+                                   id="s53"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>实木地板</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s54">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="balconyKBMaterial" th:value="ceramicTile"
+                                   th:checked="${decorationForm.balconyKBMaterial != null and #strings.containsIgnoreCase(decorationForm.balconyKBMaterial,'ceramicTile')}"
+                                   id="s54"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>瓷砖</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s55">
+                        <div class="weui-cell__hd">备注</div>
+                        <div class="weui-cell__bd">
+                            <p>
+                                <input id="s55" class="weui-input" name="balconyRemark"
+                                       th:value="${decorationForm.balconyRemark}"
+                                       type="text" placeholder=""/>
+                            </p>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="weui-cells__title">主卫</div>
+                <div class="weui-cells weui-cells_checkbox">
+                    <label class="weui-cell weui-check__label" for="s56">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="hostBathroomKBMaterial" th:value="none"
+                                   th:checked="${decorationForm.hostBathroomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.hostBathroomKBMaterial,'none')}"
+                                   id="s56"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>无需求</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s57">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="hostBathroomKBMaterial" th:value="marble"
+                                   th:checked="${decorationForm.hostBathroomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.hostBathroomKBMaterial,'marble')}"
+                                   id="s57"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>大理石</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s58">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="hostBathroomKBMaterial" th:value="woodfloor"
+                                   th:checked="${decorationForm.hostBathroomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.hostBathroomKBMaterial,'woodfloor')}"
+                                   id="s58"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>实木地板</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s59">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="hostBathroomKBMaterial" th:value="ceramicTile"
+                                   th:checked="${decorationForm.hostBathroomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.hostBathroomKBMaterial,'ceramicTile')}"
+                                   id="s59"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>瓷砖</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s60">
+                        <div class="weui-cell__hd">备注</div>
+                        <div class="weui-cell__bd">
+                            <p>
+                                <input id="s60" class="weui-input" name="hostBathroomRemark" type="text"
+                                       th:value="${decorationForm.hostBathroomRemark}"
+                                       placeholder=""/>
+                            </p>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="weui-cells__title">客卫</div>
+                <div class="weui-cells weui-cells_checkbox">
+                    <label class="weui-cell weui-check__label" for="s61">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="guestBathroomKBMaterial" th:value="none"
+                                   th:checked="${decorationForm.guestBathroomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.guestBathroomKBMaterial,'none')}"
+                                   id="s61"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>无需求</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s62">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="guestBathroomKBMaterial" th:value="marble"
+                                   th:checked="${decorationForm.guestBathroomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.guestBathroomKBMaterial,'marble')}"
+                                   id="s62"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>大理石</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s63">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="guestBathroomKBMaterial" th:value="woodfloor"
+                                   th:checked="${decorationForm.guestBathroomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.guestBathroomKBMaterial,'woodfloor')}"
+                                   id="s63"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>实木地板</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s64">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="guestBathroomKBMaterial" th:value="ceramicTile"
+                                   th:checked="${decorationForm.guestBathroomKBMaterial != null and #strings.containsIgnoreCase(decorationForm.guestBathroomKBMaterial,'ceramicTile')}"
+                                   id="s64"/> <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>瓷砖</p>
+                        </div>
+                    </label>
+                    <label class="weui-cell weui-check__label" for="s65">
+                        <div class="weui-cell__hd">备注</div>
+                        <div class="weui-cell__bd">
+                            <p>
+                                <input id="s65" class="weui-input" name="guestBathroomRemark" type="text"
+                                       th:value="${decorationForm.guestBathroomRemark}"
+                                       placeholder=""/>
+                            </p>
+                        </div>
+                    </label>
+                </div>
+            </form>
+            <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_primary" href="javascript:;" id="saveMaterial">下一步：房屋图片</a>
+            </div>
+
+            <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_default" href="javascript:"
+                   th:href="@{/decorationForm/addFormPage2/{id}(id=${decorationForm.id})}">上一步：房屋信息</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/js/zepto.min.js}" src="../../static/js/zepto.min.js"></script>
+<script th:src="@{/js/jquery-3.2.0.min.js}" src="../../static/js/jquery-3.2.0.min.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
+<script th:src="@{/js/common.js}" src="../../static/js/common.js"></script>
+<script th:src="@{/js/customer.js}" src="../../static/js/customer.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
+    <title>我的</title>
+    <link rel="stylesheet" href="../../static/css/weui.css" th:href="@{/css/weui.css}"/>
+    <link rel="stylesheet" href="../../static/css/example.css" th:href="@{/css/example.css}"/>
+    <style type="text/css">
+
+
+    </style>
+</head>
+<body>
+<div class="weui-toptips weui-toptips_warn js_tooltips"></div>
+<div class="container" id="container">
+    <div class="page js_show home">
+        <div class="page__hd"></div>
+        <div class="page__bd">
+            <div class="weui-cells__title"></div>
+            <div class="weui-cells">
+                <a class="weui-cell weui-cell_access" href="account.html" th:href="@{account}">
+                    <div class="weui-cell__bd">
+                        <p>登录名</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+                <a th:if="${user.userType == '1'}" class="weui-cell weui-cell_access" href="../order/my_order_list.html"
+                   th:href="@{/decorationForm/myRegisterFormList}">
+                    <div class="weui-cell__bd">
+                        <p>我的登记表</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+            </div>
+            <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_primary" href="javascript:;" id="logout">退出</a>
+            </div>
+
+
+            <!--BEGIN dialog1-->
+            <div class="js_dialog" id="iosDialog1" style="display: none;">
+                <div class="weui-mask"></div>
+                <div class="weui-dialog">
+                    <div class="weui-dialog__hd"><strong class="weui-dialog__title"></strong></div>
+                    <div class="weui-dialog__bd">弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内</div>
+                    <div class="weui-dialog__ft">
+                        <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default">辅助操作</a>
+                        <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">主操作</a>
+                    </div>
+                </div>
+            </div>
+            <!--END dialog1-->
+
+            <br/>
+            <br/>
+            <div class="weui-footer">
+                <p class="weui-footer__links">
+                    <a href="javascript:void(0);" class="weui-footer__link">建滔建材</a>
+                    <a href="http://www.itcuckoo.com" class="weui-footer__link">技术支持：布谷鸟信息科技(昆山)有限公司</a>
+                </p>
+                <p class="weui-footer__text">Copyright &copy; 2017-2019</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!--SUCCESS toast-->
+    <div id="toast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+            <p class="weui-toast__content">已完成</p>
+        </div>
+    </div>
+
+    <!--Fail toast-->
+    <div id="warnToast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-icon-warn-no-circle weui-icon_toast"></i>
+            <p class="weui-toast__content">失败</p>
+        </div>
+    </div>
+
+    <!-- loading toast -->
+    <div id="loadingToast" style="display:none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-loading weui-icon_toast"></i>
+            <p class="weui-toast__content">数据加载中</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="fixed" id="showIOSActionSheet">操作</div>
+
+<script th:src="@{/js/zepto.min.js}" src="../../static/js/zepto.min.js"></script>
+<script th:src="@{/js/jquery-3.2.0.min.js}" src="../../static/js/jquery-3.2.0.min.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
+<script th:src="@{/js/common.js}" src="../../static/js/common.js"></script>
+<script th:src="@{/js/login.js}" src="../../static/js/login.js"></script>
+
+
+</body>
+</html>

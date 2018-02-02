@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
+    <title>房屋信息</title>
+    <link rel="stylesheet" href="../../static/css/weui.css" th:href="@{/css/weui.css}"/>
+    <link rel="stylesheet" href="../../static/css/example.css" th:href="@{/css/example.css}"/>
+
+</head>
+<body>
+
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page input js_show">
+        <div class="page__bd">
+
+            <div class="weui-cells__title">房屋信息</div>
+            <form method="post" id="form">
+                <div class="weui-cells weui-cells_form">
+                    <input type="hidden" th:value="${id}" id="id" th:name="id"/>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">预约量房日期</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text" id="showDatePicker1" th:name="orderMeasureTime" th:value="${decorationForm.orderMeasureTime != null ? #dates.format(decorationForm.orderMeasureTime,'yyyy-MM-dd'):''}"/>
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">实际量房日期</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text" id="showDatePicker2" th:name="actualMeasureTime" th:value="${decorationForm.actualMeasureTime != null ? #dates.format(decorationForm.actualMeasureTime,'yyyy-MM-dd'):''}"/>
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label" for="houseArea">房屋面积</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input id="houseArea" class="weui-input" type="text" th:name="houseArea" required="true" th:value="${decorationForm.houseArea}"
+                                   placeholder="请输入建筑面积"/>
+                        </div>
+                    </div>
+                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label" for="houseTypeId">房型</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <select class="weui-select" id="houseTypeId" th:name="houseTypeId" >
+                                <option value="1" th:selected="${decorationForm ne null}?${decorationForm.houseTypeId eq 1}:${decorationForm ne null}">一室一厅</option>
+                                <option value="2" th:selected="${decorationForm ne null}?${decorationForm.houseTypeId eq 2}:${decorationForm ne null}">两室一厅</option>
+                                <option value="3" th:selected="${decorationForm ne null}?${decorationForm.houseTypeId eq 3}:${decorationForm ne null}">两室二厅</option>
+                                <option value="4" th:selected="${decorationForm ne null}?${decorationForm.houseTypeId eq 4}:${decorationForm ne null}">三室二厅</option>
+                                <option value="5" th:selected="${decorationForm ne null}?${decorationForm.houseTypeId eq 5}:${decorationForm ne null}">四室二厅</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd">
+                            <label for="buildingTypeId" class="weui-label">建筑类型</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <select class="weui-select" id="buildingTypeId" th:name="buildingTypeId">
+                                <option value="1" th:selected="${decorationForm ne null}?${decorationForm.buildingTypeId eq 1}:${decorationForm ne null}">高层</option>
+                                <option value="2" th:selected="${decorationForm ne null}?${decorationForm.buildingTypeId eq 2}:${decorationForm ne null}">小高层</option>
+                                <option value="3" th:selected="${decorationForm ne null}?${decorationForm.buildingTypeId eq 3}:${decorationForm ne null}">多层</option>
+                                <option value="4" th:selected="${decorationForm ne null}?${decorationForm.buildingTypeId eq 4}:${decorationForm ne null}">复式</option>
+                                <option value="5" th:selected="${decorationForm ne null}?${decorationForm.buildingTypeId eq 5}:${decorationForm ne null}">别墅</option>
+                                <option value="6" th:selected="${decorationForm ne null}?${decorationForm.buildingTypeId eq 6}:${decorationForm ne null}">公共建筑</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd">
+                            <label for="decorateDegreeId" class="weui-label">装修情况</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <select class="weui-select" id="decorateDegreeId" th:name="decorateDegreeId">
+                                <option value="1" th:selected="${decorationForm ne null}?${decorationForm.decorateDegreeId eq 1}:${decorationForm ne null}">毛坯房</option>
+                                <option value="2" th:selected="${decorationForm ne null}?${decorationForm.decorateDegreeId eq 2}:${decorationForm ne null}">装修翻新</option>
+                                <option value="3" th:selected="${decorationForm ne null}?${decorationForm.decorateDegreeId eq 3}:${decorationForm ne null}">局部改造</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd">
+                            <label for="decorationStyleId" class="weui-label">装修风格</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <select class="weui-select" id="decorationStyleId" th:name="decorationStyleId">
+                                <option value="1" th:selected="${decorationForm ne null}?${decorationForm.decorationStyleId eq 1}:${decorationForm ne null}">现代简约</option>
+                                <option value="2" th:selected="${decorationForm ne null}?${decorationForm.decorationStyleId eq 2}:${decorationForm ne null}">简欧</option>
+                                <option value="3" th:selected="${decorationForm ne null}?${decorationForm.decorationStyleId eq 3}:${decorationForm ne null}">英伦</option>
+                                <option value="4" th:selected="${decorationForm ne null}?${decorationForm.decorationStyleId eq 4}:${decorationForm ne null}">中式</option>
+                                <option value="5" th:selected="${decorationForm ne null}?${decorationForm.decorationStyleId eq 5}:${decorationForm ne null}">田园</option>
+                                <option value="6" th:selected="${decorationForm ne null}?${decorationForm.decorationStyleId eq 6}:${decorationForm ne null}">地中海</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd">
+                            <label for="decorationTimeId" class="weui-label">装修时间</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <select class="weui-select" id="decorationTimeId" th:name="decorationTimeId">
+                                <option value="1" th:selected="${decorationForm ne null}?${decorationForm.decorationTimeId eq 1}:${decorationForm ne null}">1个月内</option>
+                                <option value="2" th:selected="${decorationForm ne null}?${decorationForm.decorationTimeId eq 2}:${decorationForm ne null}">2个月内</option>
+                                <option value="3" th:selected="${decorationForm ne null}?${decorationForm.decorationTimeId eq 3}:${decorationForm ne null}">3个月内</option>
+                                <option value="4" th:selected="${decorationForm ne null}?${decorationForm.decorationTimeId eq 4}:${decorationForm ne null}">本年内</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd">
+                            <label for="numberOfPeopleId" class="weui-label">同居住人口</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <select class="weui-select" id="numberOfPeopleId" th:name="numberOfPeopleId">
+                                <option value="1" th:selected="${decorationForm ne null}?${decorationForm.numberOfPeopleId eq 1}:${decorationForm ne null}">单身</option>
+                                <option value="2" th:selected="${decorationForm ne null}?${decorationForm.numberOfPeopleId eq 2}:${decorationForm ne null}">夫妻</option>
+                                <option value="3" th:selected="${decorationForm ne null}?${decorationForm.numberOfPeopleId eq 3}:${decorationForm ne null}">一家三口</option>
+                                <option value="4" th:selected="${decorationForm ne null}?${decorationForm.numberOfPeopleId eq 4}:${decorationForm ne null}">四口之间</option>
+                                <option value="5" th:selected="${decorationForm ne null}?${decorationForm.numberOfPeopleId eq 5}:${decorationForm ne null}">祖孙同堂</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd">
+                            <label for="infoChannelId" class="weui-label">了解渠道</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <select class="weui-select" id="infoChannelId" th:name="infoChannelId">
+                                <option value="1" th:selected="${decorationForm ne null}?${decorationForm.infoChannelId eq 1}:${decorationForm ne null}">户外广告</option>
+                                <option value="2" th:selected="${decorationForm ne null}?${decorationForm.infoChannelId eq 2}:${decorationForm ne null}">电视广告</option>
+                                <option value="3" th:selected="${decorationForm ne null}?${decorationForm.infoChannelId eq 3}:${decorationForm ne null}">拓展</option>
+                                <option value="4" th:selected="${decorationForm ne null}?${decorationForm.infoChannelId eq 4}:${decorationForm ne null}">朋友介绍</option>
+                                <option value="5" th:selected="${decorationForm ne null}?${decorationForm.infoChannelId eq 5}:${decorationForm ne null}">社区广告</option>
+                                <option value="6" th:selected="${decorationForm ne null}?${decorationForm.infoChannelId eq 6}:${decorationForm ne null}">其它</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell weui-cell_switch">
+                            <div class="weui-cell__bd">装过传统地暖</div>
+                            <div class="weui-cell__ft">
+                                <label for="hasfloorHeating" class="weui-switch-cp">
+                                    <input id="hasfloorHeating" class="weui-switch-cp__input" type="checkbox" th:name="hasfloorHeating"
+                                           checked="checked" th:value="yes"/>
+                                    <div class="weui-switch-cp__box"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_primary" href="javascript:;" id="saveHouse">下一步：电暖材料</a>
+            </div>
+            <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_default" href="javascript:"
+                   th:href="@{/decorationForm/addFormPage1(id=${decorationForm.id})}">上一步：客户信息</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/zepto.min.js}" src="../../static/js/zepto.min.js"></script>
+<script th:src="@{/js/jquery-3.2.0.min.js}" src="../../static/js/jquery-3.2.0.min.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
+<script th:src="@{/js/common.js}" src="../../static/js/common.js"></script>
+<script th:src="@{/js/customer.js}" src="../../static/js/customer.js"></script>
+</body>
+</html>

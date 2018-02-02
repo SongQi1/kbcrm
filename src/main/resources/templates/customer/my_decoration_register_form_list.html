@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
+    <title>我的装修登记表</title>
+    <link rel="stylesheet" href="../../static/css/weui.css" th:href="@{/css/weui.css}"/>
+    <link rel="stylesheet" href="../../static/css/example.css" th:href="@{/css/example.css}"/>
+    <style type="text/css">
+        .fixed {
+            background-color: #fff;
+            bottom: 0;
+            height: 45px;
+            left: 0;
+            line-height: 45px;
+            position: fixed;
+            text-align: center;
+            width: 100%;
+            z-index: 9999;
+            border-top: 1px solid #d5d5d6;
+            color: #0bb20c;
+
+        }
+
+    </style>
+</head>
+<body>
+<div class="weui-toptips weui-toptips_warn js_tooltips"></div>
+<div class="container" id="container">
+    <div class="page js_show home">
+        <div class="page__hd">
+            <!--<a href="javascript:;" class="weui-btn weui-btn_primary">点击展现searchBar</a>-->
+            <!--<div class="weui-search-bar" id="searchBar">-->
+            <!--<form class="weui-search-bar__form" th:action="@{/user/list}" th:method="post">-->
+            <!--<div class="weui-search-bar__box">-->
+            <!--<i class="weui-icon-search"></i>-->
+            <!--<input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" name="keyword"/>-->
+            <!--<a href="javascript:" class="weui-icon-clear" id="searchClear"></a>-->
+            <!--</div>-->
+            <!--<label class="weui-search-bar__label" id="searchText">-->
+            <!--<i class="weui-icon-search"></i>-->
+            <!--<span>搜索</span>-->
+            <!--</label>-->
+            <!--</form>-->
+            <!--<a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>-->
+            <!--</div>-->
+        </div>
+        <div class="page__bd">
+            <div th:if="${#lists.isEmpty(registerFormList)}" class="weui-msg">
+                <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
+                <div class="weui-msg__text-area">
+                    <h2 class="weui-msg__title">目前没有客户装修登记，快去新建吧！</h2>
+                </div>
+                <div class="weui-msg__opr-area">
+                    <p class="weui-btn-area">
+                        <a href="customer.html" th:href="@{/decorationForm/addFormPage1}"
+                           class="weui-btn weui-btn_primary">新建</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="weui-cells searchbar-result" id="searchResult">
+                <div class="weui-cells">
+                    <a class="weui-cell weui-cell_access" th:each="registerForm:${registerFormList}"
+                       th:href="@{/decorationForm/view/{id}(id=${registerForm.id})}">
+                        <div class="weui-cell__bd">
+                            <p th:text="${registerForm.namePinyin}"></p>
+                        </div>
+                        <div class="weui-cell__ft">
+                            <p th:text="${registerForm.phone}"></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!--BEGIN actionSheet-->
+            <div>
+                <div class="weui-mask" id="iosMask" style="display: none"></div>
+                <div class="weui-actionsheet" id="iosActionsheet">
+                    <div class="weui-actionsheet__menu">
+                        <a th:href="@{/decorationForm/addFormPage1}" class="weui-btn_default">
+                            <div class="weui-actionsheet__cell" id="addAction">
+                                新增
+                            </div>
+                        </a>
+                        <a th:href="@{export}" class="weui-btn_default">
+                            <div class="weui-actionsheet__cell" id="exportAction">
+                                导出
+                            </div>
+                        </a>
+                    </div>
+                    <div class="weui-actionsheet__action">
+                        <div class="weui-actionsheet__cell" id="iosActionsheetCancel">取消</div>
+                    </div>
+                </div>
+            </div>
+            <!-- END actionSheet -->
+
+
+        </div>
+
+    </div>
+
+
+    <!--SUCCESS toast-->
+    <div id="toast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+            <p class="weui-toast__content">已完成</p>
+        </div>
+    </div>
+
+    <!--Fail toast-->
+    <div id="warnToast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-icon-warn-no-circle weui-icon_toast"></i>
+            <p class="weui-toast__content">失败</p>
+        </div>
+    </div>
+
+    <!-- loading toast -->
+    <div id="loadingToast" style="display:none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-loading weui-icon_toast"></i>
+            <p class="weui-toast__content">数据加载中</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="fixed" id="showIOSActionSheet">操作</div>
+
+<script th:src="@{/js/zepto.min.js}" src="../../static/js/zepto.min.js"></script>
+<script th:src="@{/js/jquery-3.2.0.min.js}" src="../../static/js/jquery-3.2.0.min.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
+<script th:src="@{/js/common.js}" src="../../static/js/common.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var $iosActionsheet = $('#iosActionsheet');
+        var $iosMask = $('#iosMask');
+        var $showIOSActionSheet = $("#showIOSActionSheet");
+
+        function hideActionSheet() {
+            $iosActionsheet.removeClass('weui-actionsheet_toggle');
+            $iosMask.fadeOut(200);
+            $showIOSActionSheet.fadeIn(200);
+        }
+
+        $iosMask.on('click', hideActionSheet);
+        $('#iosActionsheetCancel').on('click', hideActionSheet);
+        $showIOSActionSheet.on("click", function () {
+            $iosActionsheet.addClass('weui-actionsheet_toggle');
+            $iosMask.fadeIn(200);
+            $showIOSActionSheet.fadeOut(200);
+        });
+
+        $("#delAction").on("click", function () {
+            hideActionSheet();
+
+            function deleteAction() {
+                hideConfirmDialog();
+                alertToast("删除成功！");
+            }
+
+            confirmDialog("删除提醒", "确定要删除吗？", "确定", deleteAction, "取消", null);
+        })
+    });
+
+</script>
+</body>
+</html>

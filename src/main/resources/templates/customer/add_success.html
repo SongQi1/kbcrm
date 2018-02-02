@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
+    <title>录入成功</title>
+    <link rel="stylesheet" href="../../../static/css/weui.css" th:href="@{/css/weui.css}"/>
+    <link rel="stylesheet" href="../../../static/css/example.css" th:href="@{/css/example.css}"/>
+</head>
+<body>
+<div class="weui-toptips weui-toptips_warn js_tooltips"></div>
+
+<div class="container" id="container">
+    <div class="page__bd">
+        <div class="weui-msg">
+            <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+            <div class="weui-msg__text-area">
+                <h2 class="weui-msg__title">客户装修登记表录入成功</h2>
+            </div>
+            <div class="weui-msg__opr-area">
+                <p class="weui-btn-area">
+                    <a href="customer.html" th:href="@{/decorationForm/addFormPage1}"
+                       class="weui-btn weui-btn_primary">继续录入</a>
+                    <a href="decoration_form_view.html" th:href="@{/decorationForm/view/{id}(id=${decorationForm.id})}"
+                       class="weui-btn weui-btn_default">查看当前录入信息</a>
+                </p>
+            </div>
+        </div>
+
+        <br/>
+        <br/>
+        <div class="weui-footer">
+            <p class="weui-footer__links">
+                <a href="javascript:void(0);" class="weui-footer__link">建滔建材</a>
+                <a href="http://www.itcuckoo.com" class="weui-footer__link">技术支持：布谷鸟信息科技(昆山)有限公司</a>
+            </p>
+            <p class="weui-footer__text">Copyright &copy; 2017-2019</p>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/zepto.min.js}" src="../../../static/js/zepto.min.js"></script>
+<script th:src="@{/js/jquery-3.2.0.min.js}" src="../../../static/js/jquery-3.2.0.min.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
+<script th:src="@{/js/common.js}" src="../../../static/js/common.js"></script>
+</body>
+</html>

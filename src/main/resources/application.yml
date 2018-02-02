@@ -1,0 +1,87 @@
+server:
+  port: 80
+  context-path: /kbcrm
+spring:
+  datasource:
+    druid:
+      write:
+        url: jdbc:mysql://localhost:3306/kbcrm?useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+        initial-size: 4
+        max-active: 20
+        min-idle: 4
+        max-wait: 60000
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: select 1 from dual
+        test-while-idle: true
+        test-on-borrow: true
+        test-on-return: true
+        pool-prepared-statements: false
+        max-pool-prepared-statement-per-connection-size: 20
+      read:
+        url: jdbc:mysql://localhost:3306/kbcrm?useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+        initial-size: 4
+        max-active: 20
+        min-idle: 4
+        max-wait: 60000
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: select 1 from dual
+        test-while-idle: true
+        test-on-borrow: true
+        test-on-return: true
+        pool-prepared-statements: false
+        max-pool-prepared-statement-per-connection-size: 20
+      #配置初始化大小、最小、最大 -->
+      initial-size: 4
+      max-active: 20
+      min-idle: 4
+      #配置获取连接等待超时的时间 -->
+      max-wait: 60000
+      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+      time-between-eviction-runs-millis: 60000
+      #配置一个连接在池中最小生存的时间，单位是毫秒 -->
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 1 from dual
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      #打开PSCache，并且指定每个连接上PSCache的大小
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+      #配置监控统计拦截的filters
+      filter:
+        stat:
+          #开启慢sql记录功能
+          log-slow-sql: true
+          slow-sql-millis: 1000
+  jackson:
+    date-format: yyyy/MM/dd HH:mm:ss
+    default-property-inclusion: non_null
+
+  devtools:
+    restart:
+      #重启排除目录
+      exclude: /static/**,/templates/**
+
+  thymeleaf:
+    prefix: classpath:/templates
+    cache: false
+    cache-period: 0
+  template:
+    cache: false
+
+mybatis:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  type-aliases-package: com.bocs.sys.model
+
+
+
+
+

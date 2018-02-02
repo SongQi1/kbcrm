@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bocs.sys.mapper.SysUserMapper">
+	<!-- 查询列表-->
+	<select id="selectIdPage" resultType="java.lang.Long" parameterType="java.util.Map">
+		SELECT id FROM sys_user
+		<where>
+			<if test="cm.weixin != null and cm.weixin != ''">
+				 and weixin = #{cm.weixin}
+			</if>
+			<if test="cm.password != null and cm.password != ''">
+				 and password = #{cm.password}
+			</if>
+			<if test="cm.phone != null and cm.phone != ''">
+				 and phone = #{cm.phone}
+			</if>
+			<if test="cm.sex != null and cm.sex != ''">
+				 and sex = #{cm.sex}
+			</if>
+			<if test="cm.userName != null and cm.userName != ''">
+				 and userName = #{cm.userName}
+			</if>
+			<if test="cm.userType != null and cm.userType != ''">
+				 and userType = #{cm.userType}
+			</if>
+			<if test="cm.userTypeList != null">
+				and userType IN
+				<foreach collection="cm.userTypeList" open="(" close=")" separator="," item="item" index="index" >
+					#{item}
+				</foreach>
+			</if>
+			<if test="cm.enable != null and cm.enable != ''">
+				 and enable = #{cm.enable}
+			</if>
+			<if test="cm.remark != null and cm.remark != ''">
+				 and remark = #{cm.remark}
+			</if>
+			<if test="cm.createTime != null and cm.createTime != ''">
+				 and createTime = #{cm.createTime}
+			</if>
+			<if test="cm.createBy != null and cm.createBy != ''">
+				 and createBy = #{cm.createBy}
+			</if>
+			<if test="cm.updateTime != null and cm.updateTime != ''">
+				 and updateTime = #{cm.updateTime}
+			</if>
+			<if test="cm.updateBy != null and cm.updateBy != ''">
+				 and updateBy = #{cm.updateBy}
+			</if>
+			<if test="cm.keyword != null">
+				and (account like CONCAT('%',#{cm.keyword},'%') or userName like CONCAT('%',#{cm.keyword},'%') or phone like CONCAT('%',#{cm.keyword},'%'))
+			</if>
+			<if test="cm.userInfo != null and cm.userInfo != ''">
+				and (namePinyin like CONCAT('%',#{cm.userInfo},'%') or phone like CONCAT('%',#{cm.userInfo},'%'))
+			</if>
+			<if test="cm.startTime != null and cm.startTime != ''" >
+				AND employDate &gt;= #{cm.startTime}
+			</if>
+			<if test="cm.endTime != null and cm.endTime != ''" >
+				AND employDate &lt;= #{cm.endTime}
+			</if>
+			<if test="cm.titleId != null and cm.titleId != ''" >
+				AND titleId = #{cm.titleId}
+			</if>
+		</where>
+		ORDER BY id DESC
+	</select>
+
+	<select id="getByAccount" resultType="sysUser">
+		select * from sys_user where phone=#{account} or userName=#{account}
+	</select>
+
+	<select id="getByAccountByIdCard" resultType="sysUser">
+		select * from sys_user where (phone=#{account} or userName=#{account}) and idCard=#{idCard}
+	</select>
+
+	<select id="searchByKeyword" resultType="java.lang.Long">
+		SELECT id FROM sys_user
+		<where>
+			<if test="cm.userType != null and cm.userType != ''">
+				and userType = #{cm.userType}
+			</if>
+			<if test="cm.enable != null and cm.enable != ''">
+				and enable = #{cm.enable}
+			</if>
+			<if test="cm.keyword != null">
+				and (account like CONCAT('%',#{cm.keyword},'%') or userName like CONCAT('%',#{cm.keyword},'%') or phone like CONCAT('%',#{cm.keyword},'%'))
+			</if>
+		</where>
+	</select>
+</mapper>

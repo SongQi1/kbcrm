@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
+    <title>查看装修登记信息</title>
+    <link rel="stylesheet" href="../../static/css/weui.css" th:href="@{/css/weui.css}"/>
+</head>
+<body>
+<div class="weui-toptips weui-toptips_warn js_tooltips"></div>
+<div class="container" id="container">
+
+    <div class="js_show page home">
+        <div class="page__hd"></div>
+        <div class="page__bd">
+            <div th:if="${decorationForm == null}" class="weui-msg">
+                <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
+                <div class="weui-msg__text-area">
+                    <h2 class="weui-msg__title">记录不存在！</h2>
+                </div>
+                <div class="weui-msg__opr-area">
+                    <p class="weui-btn-area">
+                        <a href="javascript:history.back();" th:href="@{/decorationForm/myRegisterFormList}"
+                           class="weui-btn weui-btn_primary">返回</a>
+                    </p>
+                </div>
+            </div>
+            <div th:if="${decorationForm != null}" >
+                <div class="weui-form-preview">
+                    <div class="weui-form-preview__bd">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">客户姓名</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.namePinyin}">张三
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">性别</label>
+                            <span class="weui-form-preview__value"  th:text="${decorationForm.sex ne 0}?(${decorationForm.sex eq 1}?'男':'女'):'不详'">男
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">手机号</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.phone}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">微信</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.weixin}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">QQ</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.qq}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">Email</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.email}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">预约测量时间</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.orderMeasureTime != null ? #dates.format(decorationForm.orderMeasureTime, 'yyyy-MM-dd') :''}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">实际测量时间</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.actualMeasureTime != null ? #dates.format(decorationForm.actualMeasureTime, 'yyyy-MM-dd') :''}">13888888888
+                        </span>
+                        </div>
+
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">房屋地址</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.address}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">房屋类型</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.houseType}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">房屋面积</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.houseArea}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">建筑类型</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.buildingType}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">装修程度</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.decorateDegree}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">装修风格</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.decorationStyle}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">装修时间</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.decorationTime}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">是有地暖</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.hasfloorHeating == 'yes' ? '是':'否'}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">同居住人口</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.numberOfPeople}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">信息渠道</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.infoChannel}">13888888888
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weui-cells__title">装修材料</div>
+                <div class="weui-form-preview">
+                    <div class="weui-form-preview__bd">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">客厅</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.kitchenRoomKBMaterial != null ? #strings.multipleReplace(decorationForm.kitchenRoomKBMaterial,{'none','marble','woodfloor','ceramicTile'},{'无需求','大理石','实木地板','磁砖'}):''}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">客厅备注</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.livingRoomRemark}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">餐厅</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.diningRoomKBMaterial != null ? #strings.multipleReplace(decorationForm.diningRoomKBMaterial,{'none','marble','woodfloor','ceramicTile'},{'无需求','大理石','实木地板','磁砖'}):''}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">餐厅备注</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.diningRoomRemark}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">厨房</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.kitchenRoomKBMaterial != null ? #strings.multipleReplace(decorationForm.kitchenRoomKBMaterial,{'none','marble','woodfloor','ceramicTile'},{'无需求','大理石','实木地板','磁砖'}):''}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">厨房备注</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.kitchenRoomRemark}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">主卧</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.hostBedRoomKBMaterial != null ? #strings.multipleReplace(decorationForm.hostBedRoomKBMaterial,{'none','marble','woodfloor','ceramicTile'},{'无需求','大理石','实木地板','磁砖'}):''}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">主卧备注</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.hostBedRoomRemark}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">次卧</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.secondBedRoomKBMaterial != null ? #strings.multipleReplace(decorationForm.secondBedRoomKBMaterial,{'none','marble','woodfloor','ceramicTile'},{'无需求','大理石','实木地板','磁砖'}):''}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">次卧备注</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.secondBedRoomRemark}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">客房</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.guestBedRoomKBMaterial != null ? #strings.multipleReplace(decorationForm.guestBedRoomKBMaterial,{'none','marble','woodfloor','ceramicTile'},{'无需求','大理石','实木地板','磁砖'}):''}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">客房备注</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.guestBedRoomRemark}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">书房</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.studyRoomKBMaterial != null ? #strings.multipleReplace(decorationForm.studyRoomKBMaterial,{'none','marble','woodfloor','ceramicTile'},{'无需求','大理石','实木地板','磁砖'}):''}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">书房备注</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.studyRoomRemark}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">储藏室</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.storeRoomKBMaterial != null ? #strings.multipleReplace(decorationForm.storeRoomKBMaterial,{'none','marble','woodfloor','ceramicTile'},{'无需求','大理石','实木地板','磁砖'}):''}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">储藏室备注</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.storeRoomRemark}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">阳台</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.balconyKBMaterial != null ? #strings.multipleReplace(decorationForm.balconyKBMaterial,{'none','marble','woodfloor','ceramicTile'},{'无需求','大理石','实木地板','磁砖'}):''}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">阳台备注</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.balconyRemark}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">主卫生间</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.hostBathroomKBMaterial != null ? #strings.multipleReplace(decorationForm.hostBathroomKBMaterial,{'none','marble','woodfloor','ceramicTile'},{'无需求','大理石','实木地板','磁砖'}):''}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">主卫生间备注</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.hostBathroomRemark}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">客卫生间</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.guestBathroomKBMaterial != null ? #strings.multipleReplace(decorationForm.guestBathroomKBMaterial,{'none','marble','woodfloor','ceramicTile'},{'无需求','大理石','实木地板','磁砖'}):''}">13888888888
+                        </span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">客卫生间备注</label>
+                            <span class="weui-form-preview__value" th:text="${decorationForm.guestBathroomRemark}">13888888888
+                        </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div th:if="${!#lists.isEmpty(entrancePicIdList)}">
+                    <div class="weui-cells__title">小区正门照片</div>
+                    <div class="weui-form-preview">
+                        <div class="weui-form-preview__bd">
+                            <div class="weui-gallery" id="gallery">
+                                <span class="weui-gallery__img" id="galleryImg"></span>
+                            </div>
+                            <div class="weui-uploader">
+                                <div class="weui-uploader__bd">
+                                    <ul class="weui-uploader__files" id="uploaderFiles">
+                                        <li th:each="picId:${entrancePicIdList}" class="weui-uploader__file"  th:style="'background-image:url('+@{/pictures/viewimage/{picId}(picId=${picId})}+');'" style="background-image:url('')"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div th:if="${!#lists.isEmpty(unitPicIdList)}">
+                    <div class="weui-cells__title">单元楼照片</div>
+                    <div class="weui-form-preview">
+                        <div class="weui-form-preview__bd">
+                            <div class="weui-gallery" id="gallery2">
+                                <span class="weui-gallery__img" id="galleryImg2"></span>
+                            </div>
+                            <div class="weui-uploader">
+                                <div class="weui-uploader__bd">
+                                    <ul class="weui-uploader__files" id="uploaderFiles2">
+                                        <li th:each="picId:${unitPicIdList}" class="weui-uploader__file" th:style="'background-image:url('+@{/pictures/viewimage/{picId}(picId=${picId})}+');'" style="background-image:url('')"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div th:if="${!#lists.isEmpty(doorPicIdList)}">
+                    <div class="weui-cells__title">客户门牌照片</div>
+                    <div class="weui-form-preview">
+                        <div class="weui-form-preview__bd">
+                            <div class="weui-gallery" id="gallery3">
+                                <span class="weui-gallery__img" id="galleryImg3"></span>
+                            </div>
+                            <div class="weui-uploader">
+                                <div class="weui-uploader__bd">
+                                    <ul class="weui-uploader__files" id="uploaderFiles3">
+                                        <li th:each="picId:${doorPicIdList}" class="weui-uploader__file" th:style="'background-image:url('+@{/pictures/viewimage/{picId}(picId=${picId})}+');'" style="background-image:url('')"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-form-preview__ft">
+                    <a class="weui-form-preview__btn weui-form-preview__btn_primary " href="javascript:;" th:href="@{/decorationForm/addFormPage1(id=${decorationForm.id})}" >编辑</a>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_default" id="del" th:data="${decorationForm.id}">删除</button>
+                </div>
+            </div>
+
+
+            <!--BEGIN dialog1-->
+            <div class="js_dialog" id="iosDialog1" style="display: none;">
+                <div class="weui-mask"></div>
+                <div class="weui-dialog">
+                    <div class="weui-dialog__hd"><strong class="weui-dialog__title"></strong></div>
+                    <div class="weui-dialog__bd">弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内</div>
+                    <div class="weui-dialog__ft">
+                        <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default">辅助操作</a>
+                        <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">主操作</a>
+                    </div>
+                </div>
+            </div>
+            <!--END dialog1-->
+
+            <br/>
+            <br/>
+            <div class="weui-footer">
+                <p class="weui-footer__links">
+                    <a href="javascript:void(0);" class="weui-footer__link">建滔地暖</a>
+                    <a href="http://www.itcuckoo.com" class="weui-footer__link">技术支持：布谷鸟信息科技(昆山)有限公司</a>
+                </p>
+                <p class="weui-footer__text">Copyright &copy; 2017-2019</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!--SUCCESS toast-->
+    <div id="toast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+            <p class="weui-toast__content">已完成</p>
+        </div>
+    </div>
+
+    <!--Fail toast-->
+    <div id="warnToast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-icon-warn-no-circle weui-icon_toast"></i>
+            <p class="weui-toast__content">失败</p>
+        </div>
+    </div>
+
+    <!-- loading toast -->
+    <div id="loadingToast" style="display:none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-loading weui-icon_toast"></i>
+            <p class="weui-toast__content">数据加载中</p>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/zepto.min.js}" src="../../static/js/zepto.min.js"></script>
+<script th:src="@{/js/jquery-3.2.0.min.js}" src="../../static/js/jquery-3.2.0.min.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
+<script th:src="@{/js/common.js}" src="../../static/js/common.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var $gallery = $("#gallery"),
+            $galleryImg = $("#galleryImg"),
+            $uploaderFiles = $("#uploaderFiles");
+
+        $uploaderFiles.on("click", "li", function () {
+            $galleryImg.attr("style", this.getAttribute("style"));
+            $gallery.fadeIn(100);
+        });
+        $galleryImg.on("click", function () {
+            $gallery.fadeOut(100);
+        });
+
+
+        var $gallery2 = $("#gallery2"),
+            $galleryImg2 = $("#galleryImg2"),
+            $uploaderFiles2 = $("#uploaderFiles2");
+
+        $uploaderFiles2.on("click", "li", function () {
+            $galleryImg2.attr("style", this.getAttribute("style"));
+            $gallery2.fadeIn(100);
+        });
+        $galleryImg2.on("click", function () {
+            $gallery2.fadeOut(100);
+        });
+
+        var $gallery3 = $("#gallery3"),
+            $galleryImg3 = $("#galleryImg3"),
+            $uploaderFiles3 = $("#uploaderFiles3");
+
+        $uploaderFiles3.on("click", "li", function () {
+            $galleryImg3.attr("style", this.getAttribute("style"));
+            $gallery3.fadeIn(100);
+        });
+        $galleryImg3.on("click", function () {
+            $gallery3.fadeOut(100);
+        });
+
+        $("#del").on("click",function () {
+            var $this = $(this);
+            function deleteAction() {
+                var id = $this.attr("data");
+                $.ajax({
+                    url: contextRoot + "decorationForm/delete",
+                    data:{"id":id},
+                    success:function(data){
+                        if(data.success){
+                            window.location.href= contextRoot + 'decorationForm/myRegisterFormList';
+                        }else{
+                            warnToast(data.msg);
+                        }
+                    }
+                });
+            }
+            confirmDialog("提示","确定要删除吗？","确定", deleteAction, "取消")
+        });
+    });
+
+</script>
+
+
+</body>
+</html>

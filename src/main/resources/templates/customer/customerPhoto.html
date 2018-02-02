@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
+    <title>房屋图片</title>
+    <link rel="stylesheet" href="../../static/css/weui.css" th:href="@{/css/weui.css}"/>
+    <link rel="stylesheet" href="../../static/css/example.css" th:href="@{/css/example.css}"/>
+    <style type="text/css">
+        .weui-uploader__input div{
+            height: 100%;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+<div class="container" id="container">
+    <input id="id" type="hidden" th:value="${decorationForm.id}"/>
+    <div class="page uploader js_show">
+        <div class="page__bd">
+            <div class="weui-cells__title">小区正门照片</div>
+            <div class="weui-gallery" id="gallery">
+                <span class="weui-gallery__img" id="galleryImg"></span>
+                <div class="weui-gallery__opr">
+                    <a href="javascript:" class="weui-gallery__del">
+                        <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files" id="imgList">
+                                <li th:if="${!#lists.isEmpty(entrancePicIdList)}" th:each="picId:${entrancePicIdList}" class="weui-uploader__file" th:style="'background-image:url('+@{/pictures/viewimage/{picId}(picId=${picId})}+');'" th:data="${picId}"></li>
+                            </ul>
+                            <div class="weui-uploader__input-box">
+                                <div id="imgInput" class="weui-uploader__input"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-cells__title">单元楼照片</div>
+            <div class="weui-gallery" id="gallery2">
+                <span class="weui-gallery__img" id="galleryImg2"></span>
+                <div class="weui-gallery__opr">
+                    <a href="javascript:" class="weui-gallery__del">
+                        <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files" id="imgList2">
+                                <li th:if="${!#lists.isEmpty(unitPicIdList)}" th:each="picId:${unitPicIdList}" class="weui-uploader__file" th:style="'background-image:url('+@{/pictures/viewimage/{picId}(picId=${picId})}+');'" th:data="${picId}"></li>
+                            </ul>
+                            <div class="weui-uploader__input-box">
+                                <div id="imgInput2" class="weui-uploader__input">选择图片</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-cells__title">客户门牌照片</div>
+            <div class="weui-gallery" id="gallery3">
+                <span class="weui-gallery__img" id="galleryImg3"></span>
+                <div class="weui-gallery__opr">
+                    <a href="javascript:" class="weui-gallery__del">
+                        <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files" id="imgList3">
+                                <li th:if="${!#lists.isEmpty(doorPicIdList)}" th:each="picId:${doorPicIdList}" class="weui-uploader__file" th:style="'background-image:url('+@{/pictures/viewimage/{picId}(picId=${picId})}+');'" th:data="${picId}"></li>
+                            </ul>
+                            <div class="weui-uploader__input-box">
+                                <div id="imgInput3" class="weui-uploader__input">选择图片</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_primary" href="javascript:" th:href="@{/decorationForm/addSuccessPage(id=${decorationForm.id})}">确定</a>
+            </div>
+            <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_default" href="javascript:"
+                   th:href="@{/decorationForm/addFormPage3/{id}(id=${decorationForm.id})}">上一步：电暖材料</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/zepto.min.js}" src="../../static/js/zepto.min.js"></script>
+<script th:src="@{/js/jquery-3.2.0.min.js}" src="../../static/js/jquery-3.2.0.min.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
+<script src="http://cdn.staticfile.org/webuploader/0.1.0/webuploader.min.js"></script>
+<script th:src="@{/js/common.js}" src="../../static/js/common.js"></script>
+<script th:src="@{/js/customer.js}" src="../../static/js/customer.js"></script>
+<script th:src="@{/js/picupload.js}" src="../../static/js/picupload.js"></script>
+
+
+
+</body>
+</html>

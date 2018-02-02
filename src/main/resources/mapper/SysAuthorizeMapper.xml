@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bocs.mapper.SysAuthorizeMapper">
+
+	<select id="queryPermissionByUserId" resultType="java.lang.String">
+		select CONCAT(menu.permission,'.',um.permission) permission
+		from sys_menu menu
+		join sys_user_menu um on um.menuId=menu.id
+		where length(menu.permission)>0 and um.userId=#{userId}
+		union
+		select CONCAT(menu.permission,'.',rm.permission) permission
+		from sys_menu menu 
+		join sys_role_menu rm on rm.menuId=menu.id
+		join sys_user_role ur on ur.roleId=rm.roleId
+		where length(menu.permission)>0 and ur.userId=#{userId}
+	</select>
+</mapper>

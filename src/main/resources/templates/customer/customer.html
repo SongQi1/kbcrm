@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
+    <title>客户信息</title>
+    <link rel="stylesheet" href="../../static/css/weui.css" th:href="@{/css/weui.css}"/>
+    <link rel="stylesheet" href="../../static/css/example.css" th:href="@{/css/example.css}"/>
+
+</head>
+<body>
+
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page input js_show">
+        <div class="page__bd">
+
+
+            <div class="weui-cells__title">客户信息</div>
+            <form id="form" method="post">
+                <div class="weui-cells weui-cells_form">
+                    <input type="hidden" id="id" name="id"
+                           th:value="${decorationForm ne null ? decorationForm.id : ''}"/>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label" for="namePinyin">客户姓名</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input id="namePinyin" class="weui-input" type="text" required="true" name="namePinyin"
+                                   th:value="${decorationForm ne null ? decorationForm.namePinyin:''}"
+                                   placeholder="请输入客户姓名"/>
+                        </div>
+                    </div>
+
+
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label" for="sex">性别</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <select class="weui-select" name="sex" id="sex">
+                                <option value="1"
+                                        th:selected="${decorationForm ne null}?${decorationForm.sex eq 1}:${decorationForm ne null}">
+                                    男
+                                </option>
+                                <option value="2"
+                                        th:selected="${decorationForm ne null}?${decorationForm.sex eq 2}:${decorationForm ne null}">
+                                    女
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label" for="phone">手机号</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input id="phone" class="weui-input" type="text" placeholder="请输入手机号" required="true" name="phone"
+                                   th:value="${decorationForm ne null ? decorationForm.phone:''}"/>
+                        </div>
+                    </div>
+
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label" for="weixin">微信</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input id="weixin" class="weui-input" type="text" name="weixin"
+                                   th:value="${decorationForm ne null ? decorationForm.weixin:''}"
+                                   placeholder="请输入微信"/>
+                        </div>
+                    </div>
+
+
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label" for="qq">QQ</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input id="qq" class="weui-input" type="text" pattern="[0-9]*" name="qq"
+                                   th:value="${decorationForm ne null ? decorationForm.qq:''}"
+                                   placeholder="请输入QQ"/>
+                        </div>
+                    </div>
+
+
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label" for="email">E-mail</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input id="email" class="weui-input" type="text" name="email"
+                                   th:value="${decorationForm ne null ? decorationForm.email:''}"
+                                   placeholder="请输入E-mail"/>
+                        </div>
+                    </div>
+
+
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label" for="address">地址</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input id="address" class="weui-input" type="text" name="address"
+                                   th:value="${decorationForm ne null ? decorationForm.address:''}"
+                                   placeholder="请输入客户地址"/>
+                        </div>
+                    </div>
+
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label" for="status">客户状态</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <select class="weui-select" name="status" id="status">
+                                <option value="01"
+                                        th:selected="${decorationForm ne null}?${decorationForm.status eq '01'}:${decorationForm ne null}">
+                                    已交订金
+                                </option>
+                                <option value="02"
+                                        th:selected="${decorationForm ne null}?${decorationForm.status eq '02'}:${decorationForm ne null}">
+                                    已结案
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+            <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_primary" href="javascript:" id="customer">下一步：房屋信息</a>
+            </div>
+
+
+            <!--SUCCESS toast-->
+            <div id="toast" style="display: none;">
+                <div class="weui-mask_transparent"></div>
+                <div class="weui-toast">
+                    <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+                    <p class="weui-toast__content">已完成</p>
+                </div>
+            </div>
+
+            <!--Fail toast-->
+            <div id="warnToast" style="display: none;">
+                <div class="weui-mask_transparent"></div>
+                <div class="weui-toast">
+                    <i class="weui-icon-warn-no-circle weui-icon_toast"></i>
+                    <p class="weui-toast__content">失败</p>
+                </div>
+            </div>
+
+            <!-- loading toast -->
+            <div id="loadingToast" style="display:none;">
+                <div class="weui-mask_transparent"></div>
+                <div class="weui-toast">
+                    <i class="weui-loading weui-icon_toast"></i>
+                    <p class="weui-toast__content">数据加载中</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/js/zepto.min.js}" src="../../static/js/zepto.min.js"></script>
+<script th:src="@{/js/jquery-3.2.0.min.js}" src="../../static/js/jquery-3.2.0.min.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
+<script th:src="@{/js/common.js}" src="../../static/js/common.js"></script>
+<script th:src="@{/js/customer.js}" src="../../static/js/customer.js"></script>
+
+</body>
+</html>

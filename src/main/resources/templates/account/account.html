@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
+    <title>我的账号</title>
+    <link rel="stylesheet" href="../../static/css/weui.css" th:href="@{/css/weui.css}"/>
+    <link rel="stylesheet" href="../../static/css/example.css" th:href="@{/css/example.css}"/>
+</head>
+<body>
+<div class="weui-toptips weui-toptips_warn js_tooltips"></div>
+<div class="container" id="container">
+    <div class="page js_show home">
+        <div class="page__hd"></div>
+        <div class="page__bd">
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">登录名</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" placeholder="" id="userName" th:value="${user.userName}"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_primary" href="javascript:;" id="submit">提交</a>
+            </div>
+
+            <br/>
+            <br/>
+            <div class="weui-footer">
+                <p class="weui-footer__links">
+                    <a href="javascript:void(0);" class="weui-footer__link">建滔建材</a>
+                    <a href="http://www.itcuckoo.com" class="weui-footer__link">技术支持：布谷鸟信息科技(昆山)有限公司</a>
+                </p>
+                <p class="weui-footer__text">Copyright &copy; 2017-2019</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!--SUCCESS toast-->
+    <div id="toast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+            <p class="weui-toast__content">已完成</p>
+        </div>
+    </div>
+
+    <!--Fail toast-->
+    <div id="warnToast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-icon-warn-no-circle weui-icon_toast"></i>
+            <p class="weui-toast__content">失败</p>
+        </div>
+    </div>
+
+    <!-- loading toast -->
+    <div id="loadingToast" style="display:none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-loading weui-icon_toast"></i>
+            <p class="weui-toast__content">数据加载中</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="fixed" id="showIOSActionSheet">操作</div>
+
+<script th:src="@{/js/zepto.min.js}" src="../../static/js/zepto.min.js"></script>
+<script th:src="@{/js/jquery-3.2.0.min.js}" src="../../static/js/jquery-3.2.0.min.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
+<script th:src="@{/js/common.js}" src="../../static/js/common.js"></script>
+
+<script>
+    $(function () {
+        $("#submit").on("click", function () {
+            var userName = $("#userName").val();
+            if (userName.isEmpty()) {
+                alertToast("请输入登录名。");
+                return;
+            }
+            $.ajax({
+                url: "setUserName",
+                data: {"userName": userName},
+                success: function (data) {
+                    if (data.success) {
+                        alertToast("设置成功！");
+                    } else {
+                        alertToast("设置失败！");
+                    }
+                }
+            });
+        });
+
+    });
+
+</script>
+</body>
+</html>
